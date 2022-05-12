@@ -12,16 +12,8 @@ strategy:
   matrix:
     node_12_x:
       node_version: 12.x
-   
-steps:
-- task: NodeTool@0 
-  inputs:
-    versionSpec: $(node_version)
- 
-- script: npm install
-- task: DownloadBuildArtifacts@0
-  inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'drop'
-    downloadPath: '$(System.ArtifactsDirectory)'
+steps: 
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
