@@ -19,6 +19,7 @@ steps:
     versionSpec: $(node_version)
  
 - script: npm install
+- script: npm publish
 
 
 - task: PublishBuildArtifacts@1
