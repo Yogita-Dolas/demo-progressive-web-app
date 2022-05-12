@@ -12,24 +12,19 @@ strategy:
   matrix:
     node_12_x:
       node_version: 12.x
-    node_13_x:
-      node_version: 13.x
- 
+   
 steps:
 - task: NodeTool@0 
   inputs:
     versionSpec: $(node_version)
  
 - script: npm install
-- task: ArchiveFiles@2
+steps:
+- task: CopyFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    contents: '_buildOutput/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
