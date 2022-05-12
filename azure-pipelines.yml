@@ -19,7 +19,6 @@ steps:
     versionSpec: $(node_version)
  
 - script: npm install
-steps:
 - task: CopyFiles@2
   inputs:
     contents: '_buildOutput/**'
