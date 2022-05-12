@@ -9,6 +9,17 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+strategy:
+  matrix:
+    node_12_x:
+      node_version: 12.x
+ 
+steps:
+- task: NodeTool@0 
+  inputs:
+    versionSpec: $(node_version)
+    
+- script: npm install
 variables:
   # Web app name
   webAppName: '{{ webAppName }}'
